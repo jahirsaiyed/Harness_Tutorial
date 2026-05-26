@@ -3,12 +3,11 @@
 from __future__ import annotations
 
 import json
-import os
 from typing import Any
 
 import anthropic
 
-from harness_agent.providers.base import BaseProvider
+from harness_agent.providers.base import BaseProvider, resolve_api_key
 from harness_agent.types import Message, ToolCall
 
 
@@ -22,7 +21,7 @@ class AnthropicProvider(BaseProvider):
     def _get_client(self) -> anthropic.Anthropic:
         if self._client is None:
             self._client = anthropic.Anthropic(
-                api_key=self._api_key or os.environ.get("ANTHROPIC_API_KEY"),
+                api_key=self._api_key or resolve_api_key("ANTHROPIC_API_KEY"),
             )
         return self._client
 

@@ -6,6 +6,8 @@ import os
 
 from harness_agent.providers.anthropic_compat import AnthropicProvider
 from harness_agent.providers.base import BaseProvider
+from harness_agent.providers.compass_compat import CompassProvider
+from harness_agent.providers.deepseek_compat import DeepSeekProvider
 from harness_agent.providers.openai_compat import OpenAIProvider
 
 
@@ -36,4 +38,6 @@ def get_provider_registry() -> ProviderRegistry:
         _registry = ProviderRegistry()
         _registry.register(OpenAIProvider())
         _registry.register(AnthropicProvider())
+        _registry.register(DeepSeekProvider())
+        _registry.register(CompassProvider())
     return _registry

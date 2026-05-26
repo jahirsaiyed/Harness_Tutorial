@@ -1,14 +1,21 @@
-"""Sandboxed shell tool."""
+"""Sandboxed shell tool.
+
+Routes through the sandbox abstraction layer (harness_agent.sandbox).
+The active backend is selected by HARNESS_SANDBOX env var:
+  local   — subprocess in workspace (default, no container isolation)
+  docker  — ephemeral python:3.11-slim container, network disabled
+  e2b     — cloud microVM via e2b.dev (requires E2B_API_KEY)
+"""
 
 from __future__ import annotations
 
 from harness_agent.observations import wrap_result
-from harness_agent.tools.environments import get_terminal_backend
+from harness_agent.sandbox.base import get_sandbox
 from harness_agent.tools.registry import register
 
 
 def run_shell(command: str) -> str:
-    backend = get_terminal_backend()
+    backend = get_sandbox()
     code, out, err = backend.run(command)
     status = "success" if code == 0 else "error"
     detail = (out + ("\n" + err if err else "")).strip()[:8000]

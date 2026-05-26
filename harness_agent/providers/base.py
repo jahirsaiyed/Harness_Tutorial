@@ -2,10 +2,25 @@
 
 from __future__ import annotations
 
+import os
 from abc import ABC, abstractmethod
 from typing import Any
 
 from harness_agent.types import Message, ToolCall
+
+
+def resolve_api_key(*provider_env_vars: str) -> str | None:
+    """Return the first set env var, falling back to HARNESS_API_KEY.
+
+    Resolution order:
+    1. Provider-specific env vars (e.g. OPENAI_API_KEY, COMPASS_API_KEY)
+    2. Universal fallback: HARNESS_API_KEY
+    """
+    for var in provider_env_vars:
+        value = os.environ.get(var)
+        if value:
+            return value
+    return os.environ.get("HARNESS_API_KEY")
 
 
 class BaseProvider(ABC):

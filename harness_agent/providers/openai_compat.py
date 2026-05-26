@@ -3,12 +3,11 @@
 from __future__ import annotations
 
 import json
-import os
 from typing import Any
 
 from openai import OpenAI
 
-from harness_agent.providers.base import BaseProvider
+from harness_agent.providers.base import BaseProvider, resolve_api_key
 from harness_agent.types import Message, ToolCall
 
 
@@ -23,7 +22,7 @@ class OpenAIProvider(BaseProvider):
     def _get_client(self) -> OpenAI:
         if self._client is None:
             self._client = OpenAI(
-                api_key=self._api_key or os.environ.get("OPENAI_API_KEY"),
+                api_key=self._api_key or resolve_api_key("OPENAI_API_KEY"),
                 base_url=self._base_url,
             )
         return self._client
