@@ -1,0 +1,76 @@
+Metadata-Version: 2.4
+Name: harness-agent-tutorial
+Version: 0.1.0
+Summary: Harness Agent — learn to build a self-improving agent harness from scratch
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: openai>=1.40.0
+Requires-Dist: anthropic>=0.34.0
+Requires-Dist: pydantic>=2.7.0
+Requires-Dist: aiosqlite>=0.20.0
+Requires-Dist: httpx>=0.27.0
+Requires-Dist: python-dotenv>=1.0.0
+Requires-Dist: typer>=0.12.0
+Requires-Dist: rich>=13.7.0
+Requires-Dist: mcp>=1.0.0
+Provides-Extra: dev
+Requires-Dist: jupyter>=1.0.0; extra == "dev"
+Requires-Dist: ipykernel>=6.29.0; extra == "dev"
+Requires-Dist: nbformat>=5.10.0; extra == "dev"
+Requires-Dist: pytest>=8.0.0; extra == "dev"
+
+# Harness Agent From Scratch
+
+A chapter-by-chapter tutorial for building **Harness Agent** — a complete, self-improving agent harness — with Jupyter notebooks (`ch00`–`ch21`) and the `harness_agent` Python package.
+
+## What you build
+
+- LLM tool-calling loop with provider abstraction  
+- Tool registry, observations, sessions (SQLite + FTS5)  
+- Prompt assembly, skills, memory, learning loop, compression  
+- Subagents, MCP, cron, gateway, CLI, ACP, trajectories, plugins  
+
+## Quick start
+
+```bash
+cd Harness_Tutorial
+python -m venv .venv
+.venv\Scripts\activate   # Windows
+pip install -e ".[dev]"
+copy .env.example .env   # set OPENAI_API_KEY or ANTHROPIC_API_KEY
+set HARNESS_AGENT_HOME=./labs
+harness-agent doctor
+harness-agent chat
+```
+
+## CLI
+
+| Command | Description |
+|---------|-------------|
+| `harness-agent doctor` | Environment check |
+| `harness-agent chat` | Interactive REPL |
+| `harness-agent gateway run` | HTTP webhook gateway |
+| `harness-agent cron tick` | Run due cron jobs |
+| `harness-agent acp` | stdio JSON-RPC for IDE integration |
+| `harness-agent export-trajectories` | Export JSONL |
+
+## Notebooks
+
+Open `notebooks/` in order: `ch00_introduction.ipynb` through `ch21_full_system_integration.ipynb`.
+
+Optional: clone an external reference for comparison reading:
+
+```bash
+git clone https://github.com/NousResearch/hermes-agent.git ../reference-agent
+# REFERENCE_REPO_PATH=../reference-agent in .env
+```
+
+## Docs
+
+- [SYLLABUS.md](docs/SYLLABUS.md)  
+- [GLOSSARY.md](docs/GLOSSARY.md)  
+- [NOTEBOOK_AUTHORING.md](docs/NOTEBOOK_AUTHORING.md)  
+
+## License
+
+MIT — tutorial code for learning.

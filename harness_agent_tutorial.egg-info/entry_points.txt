@@ -1,0 +1,2 @@
+[console_scripts]
+harness-agent = harness_agent.cli.main:app

@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+*.db
+labs/sessions/
+labs/trajectories.jsonl
+.ipynb_checkpoints/
+.DS_Store
+scripts/*
+.idea/*
